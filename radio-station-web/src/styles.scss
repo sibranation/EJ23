@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+	--bg: #0f1115;
+	--bg-elev: #151922;
+	--text: #e6e8ef;
+	--muted: #9aa4b2;
+	--brand: #7c5cff;
+	--brand-2: #ff477e;
+	--card: #141824;
+	--border: #222735;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+	margin: 0;
+	font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+	background: radial-gradient(1200px 800px at 80% -10%, rgba(124,92,255,.08), transparent 60%),
+		radial-gradient(1000px 600px at -10% -10%, rgba(255,71,126,.06), transparent 50%),
+		var(--bg);
+	color: var(--text);
+}
+
+a { color: inherit; }
+
+.container { max-width: 1040px; margin: 0 auto; padding: 24px; }
+.header { position: sticky; top: 0; z-index: 10; backdrop-filter: saturate(160%) blur(10px); background: rgba(15,17,21,.6); border-bottom: 1px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight: 700; letter-spacing: .4px; }
+.brand .logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display: inline-block; }
+.nav a { text-decoration: none; color: var(--muted); padding: 8px 10px; border-radius: 8px; }
+.nav a:hover { color: var(--text); background: rgba(124,92,255,.12); }
+
+.footer { border-top: 1px solid var(--border); color: var(--muted); }
+.footer-inner { display:flex; align-items:center; justify-content: space-between; gap:16px; padding: 24px; }
+
+.grid { display:grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+.col-12 { grid-column: span 12; }
+.col-6 { grid-column: span 6; }
+.col-4 { grid-column: span 4; }
+.col-8 { grid-column: span 8; }
+@media (max-width: 900px) { .col-6, .col-4 { grid-column: span 12; } }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.card h3 { margin: 0 0 8px 0; }
+.muted { color: var(--muted); }
+
+.btn { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: white; padding: 10px 14px; border-radius: 10px; border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+input, .input { width: 100%; background: #0e121b; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; outline: none; }
+label { display:block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+
+.hero { padding: 36px 0 8px; display:flex; gap: 24px; align-items: center; }
+.hero .art { width: 88px; height: 88px; border-radius: 16px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 10px 30px rgba(124,92,255,.35); }
+.hero h1 { margin: 0; font-size: 32px; }
+.hero p { margin: 8px 0 0; color: var(--muted); }
+
+.player { background: #0e121b; border:1px solid var(--border); border-radius: 16px; padding: 16px; display:flex; align-items:center; gap: 16px; }
+.player .dot { width: 10px; height: 10px; border-radius: 50%; background: #12d47d; box-shadow: 0 0 10px #12d47d; }
