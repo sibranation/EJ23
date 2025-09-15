@@ -39,7 +39,7 @@ a { color: inherit; }
 .col-6 { grid-column: span 6; }
 .col-4 { grid-column: span 4; }
 .col-8 { grid-column: span 8; }
-@media (max-width: 900px) { .col-6, .col-4 { grid-column: span 12; } }
+@media (max-width: 900px) { .col-6, .col-4, .col-8 { grid-column: span 12; } }
 
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
 .card h3 { margin: 0 0 8px 0; }
