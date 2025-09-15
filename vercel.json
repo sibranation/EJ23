@@ -1,5 +1,5 @@
 {
-	"version": 3,
+	"version": 2,
 	"builds": [
 		{ "src": "radio-station-web/package.json", "use": "@vercel/static-build", "config": { "distDir": "radio-station-web/dist/radio-station-web" } },
 		{ "src": "api/ws.js", "use": "@vercel/edge" }
