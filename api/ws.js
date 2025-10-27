@@ -8,7 +8,15 @@ export default async function handler(req) {
 	if (req.headers.get('upgrade') !== 'websocket') {
 		return new Response('Expected WebSocket', { status: 426 });
 	}
-	const { socket, response } = Deno.upgradeWebSocket(req);
+	const upgradeHeader = req.headers.get('Upgrade');
+	if (!upgradeHeader || upgradeHeader !== 'websocket') {
+		return new Response('Expected Upgrade: websocket', { status: 426 });
+	}
+
+	const webSocketPair = new WebSocketPair();
+	const [client, server] = Object.values(webSocketPair);
+
+	const socket = server;
 	socket.id = crypto.randomUUID();
 	socket.roomId = null;
 	socket.role = 'guest';
@@ -55,5 +63,5 @@ export default async function handler(req) {
 		}
 	};
 
-	return response;
+	return new Response(null, { status: 101, webSocket: client });
 }
