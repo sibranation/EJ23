@@ -23,7 +23,7 @@ export class AudioWebrtcService {
 			if (msg.type === 'room-created') {
 				this.clientId = msg.clientId;
 			} else if (msg.type === 'signal') {
-				await this.handleSignal(msg.from, msg.payload);
+				await this.handleSignalAsSpeaker(msg.from, msg.payload);
 			}
 		});
 		this.signaling.send({ type: 'create-room', roomId, password });
@@ -53,6 +53,24 @@ export class AudioWebrtcService {
 		const offer = await pc.createOffer({ offerToReceiveAudio: true });
 		await pc.setLocalDescription(offer);
 		this.signaling.send({ type: 'signal', roomId: this.roomId, to: this.speakerId, payload: { sdp: pc.localDescription } });
+	}
+
+	private async handleSignalAsSpeaker(from: string, payload: any) {
+		let info = this.peers.get(from);
+		if (!info) {
+			info = { peer: this.createPeer(from) } as PeerInfo;
+		}
+		const pc = info.peer;
+		if (payload.sdp) {
+			await pc.setRemoteDescription(payload.sdp);
+			if (payload.sdp.type === 'offer') {
+				const answer = await pc.createAnswer();
+				await pc.setLocalDescription(answer);
+				this.signaling.send({ type: 'signal', roomId: this.roomId, to: from, payload: { sdp: pc.localDescription } });
+			}
+		} else if (payload.candidate) {
+			try { await pc.addIceCandidate(payload.candidate); } catch {}
+		}
 	}
 
 	private createPeer(peerId: string, onTrack?: (stream: MediaStream) => void) {
