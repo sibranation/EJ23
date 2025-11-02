@@ -1,6 +1,6 @@
 [build]
   publish = "radio-station-web/dist/radio-station-web/browser"
-  command = "cd radio-station-web && npm run build"
+  command = "npm install && cd radio-station-web && npm install && npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
