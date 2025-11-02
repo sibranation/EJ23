@@ -19,7 +19,7 @@ export class SignalingService {
 	private resolveOpen?: () => void;
 
 	connect(url?: string) {
-		const defaultUrl = typeof window !== 'undefined' && location.origin ? (location.origin.replace(/^http/, 'ws') + '/api/ws') : 'ws://localhost:4000';
+		const defaultUrl = typeof window !== 'undefined' && location.origin ? (location.origin.replace(/^http/, 'ws') + '/.netlify/functions/ws') : 'ws://localhost:4000';
 		const target = url || (globalThis as any).SIGNALING_URL || defaultUrl;
 		if (this.ws && this.ws.readyState === WebSocket.OPEN) return Promise.resolve();
 		this.ws = new WebSocket(target);
