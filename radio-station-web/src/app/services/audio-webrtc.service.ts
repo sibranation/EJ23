@@ -18,7 +18,7 @@ export class AudioWebrtcService {
 
 	async initAsSpeaker(roomId: string, password: string | null = null) {
 		this.roomId = roomId;
-		await this.signaling.connect('ws://localhost:4000');
+		await this.signaling.connect();
 		this.signaling.onMessage(async (msg) => {
 			if (msg.type === 'room-created') {
 				this.clientId = msg.clientId;
@@ -32,7 +32,7 @@ export class AudioWebrtcService {
 
 	async initAsGuest(roomId: string, password: string | null = null, onTrack?: (stream: MediaStream) => void) {
 		this.roomId = roomId;
-		await this.signaling.connect('ws://localhost:4000');
+		await this.signaling.connect();
 		this.signaling.onMessage(async (msg) => {
 			if (msg.type === 'room-joined') {
 				this.clientId = msg.clientId;
