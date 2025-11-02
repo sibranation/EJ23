@@ -1,9 +1,10 @@
 [build]
   publish = "radio-station-web/dist/radio-station-web/browser"
-  command = "npm install && cd radio-station-web && npm install && npm run build"
+  command = "cd radio-station-web && npm install && npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
+  NPM_FLAGS = "--production=false"
 
 [[redirects]]
   from = "/api/ws"
