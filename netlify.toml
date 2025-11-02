@@ -1,0 +1,16 @@
+[build]
+  publish = "radio-station-web/dist/radio-station-web/browser"
+  command = "cd radio-station-web && npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/api/ws"
+  to = "/.netlify/functions/ws"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
