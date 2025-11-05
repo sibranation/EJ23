@@ -14,7 +14,8 @@ export default async function handler(req) {
 	}
 
 	const webSocketPair = new WebSocketPair();
-	const [client, server] = Object.values(webSocketPair);
+	const client = webSocketPair.webSocket1;
+	const server = webSocketPair.webSocket2;
 
 	const socket = server;
 	socket.id = crypto.randomUUID();
